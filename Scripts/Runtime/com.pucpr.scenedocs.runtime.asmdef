@@ -1,0 +1,14 @@
+{
+    "name": "com.pucpr.scenedocs.runtime",
+    "rootNamespace": "PUCPR.SceneDocs",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

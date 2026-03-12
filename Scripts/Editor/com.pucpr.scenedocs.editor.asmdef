@@ -1,0 +1,18 @@
+{
+    "name": "com.pucpr.scenedocs.editor",
+    "rootNamespace": "PUCPR.SceneDocs.Editor",
+    "references": [
+        "GUID:131def0aa13f17e419d5a0316f7318ef"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

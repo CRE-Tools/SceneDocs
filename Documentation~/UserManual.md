@@ -1,6 +1,6 @@
 > [!WARNING]
 > WORK IN PROGRESS!!!
-
+<p align="right">v1.1.0</p>
 
 > [!TIP]
 > <a href="/Documentation~/UserManual.pdf">See this file in PDF</a>

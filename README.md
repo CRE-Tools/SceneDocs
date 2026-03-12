@@ -1,8 +1,9 @@
+v.0.1.0
 <p align="center">
     <img width="100" height="100" src="/Documentation~/logos/1024x.png" align="center" />
 </p>
 
-<h1 align="center">#UNITY - PROJECT NAME#</h1>
+<h1 align="center">#UNITY - Scene Docs#</h1>
 
 [About](#about) | [How to Install](#how-to-install) | <a href="/Documentation~/UserManual.md">Documentation</a> | <a href="/Documentation~/CONTRIBUTING.md">Contributing</a>
 
@@ -21,7 +22,7 @@
 - Unity -> Window -> Package Manager  
 - Click "+" at the top left corner  
 - Add package from git URL  
-- Insert `#GIT LINK#`
+- Insert `https://github.com/CRE-Tools/SceneDocs.git`
 - Add  
 - Done
 
