@@ -12,8 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c07535ffb4534fd4f85f2c8ad1edc56b, type: 3}
   m_Name: NoteData
   m_EditorClassIdentifier: 
-  id: 
-  title: 
-  description: 
   components:
-  - {fileID: 11400000, guid: 1b83d3dc79a21b44a9b9ba4c4a49baca, type: 2}
+  - {fileID: 0}

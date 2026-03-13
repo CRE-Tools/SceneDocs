@@ -2,12 +2,12 @@ using UnityEngine;
 
 namespace PUCPR.SceneDocs
 {
-    [CreateAssetMenu(fileName = "NDC_CameraView")]
-    public class NDC_CameraView : NoteDataComponent
+    [NoteComponentMenu("Camera State")]
+    public class NoteComponent_CameraViewState : ANoteComponent
     {
         public Vector3 position;
         public Quaternion rotation;
         public float size;
-        public bool isOrthographic = false;
+        public bool isOrthographic;
     }
 }
