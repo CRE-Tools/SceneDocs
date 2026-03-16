@@ -1,15 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
 namespace PUCPR.SceneDocs.Editor
 {
     [CustomEditor(typeof(NoteCreator))]
-    public class NoteCreatorEditor : UnityEditor.Editor
+    public class NoteCreator_Editor : UnityEditor.Editor
     {
         private NoteCreator creator;
         private string noteName;
+        private UnityEditor.Editor noteEditor;
 
         private void OnEnable()
         {
@@ -18,14 +17,19 @@ namespace PUCPR.SceneDocs.Editor
 
         public override void OnInspectorGUI()
         {
-            if (NewNote())
+            if (AddNewNote())
                 return;
             GUILayout.Space(10);
+
+            if (!DrawNoteData())
+                return;
+
+            //GUILayout.Space(10);
             AddNewNoteComponent();
 
         }
 
-        private bool NewNote()
+        private bool AddNewNote()
         {
             if (creator.currentNote == null)
             {
@@ -46,9 +50,34 @@ namespace PUCPR.SceneDocs.Editor
                     UnityEditor.AssetDatabase.SaveAssets();
                 }
                 EditorGUI.EndDisabledGroup();
+
+                GetNoteEditor();
+
                 return true;
             }
             return false;
+        }
+
+        private void GetNoteEditor()
+        {
+            if (creator.currentNote != null)
+            {
+                if (noteEditor == null || noteEditor.target != creator.currentNote)
+                    UnityEditor.Editor.CreateCachedEditor(creator.currentNote, null, ref noteEditor);
+            }
+        }
+
+        private bool DrawNoteData()
+        {
+            if (!noteEditor)
+            {
+                GetNoteEditor();
+                return false;
+            }
+
+            noteEditor.OnInspectorGUI();
+
+            return true;
         }
 
         private void AddNewNoteComponent()
@@ -74,6 +103,12 @@ namespace PUCPR.SceneDocs.Editor
 
                 menu.ShowAsContext();
             }
+        }
+
+        private void OnDisable()
+        {
+            if (noteEditor != null)
+                DestroyImmediate(noteEditor);
         }
     }
 }
