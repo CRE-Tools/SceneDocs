@@ -28,7 +28,6 @@ namespace PUCPR.SceneDocs
         #endregion
 
         #region NoteComponets
-        [SerializeField]
         private List<ANoteComponent> components = new();
         public IReadOnlyList<ANoteComponent> Components => components;
 
@@ -51,6 +50,8 @@ namespace PUCPR.SceneDocs
             }
             return null;
         }
+
+        public List<ANoteComponent> GetComponents() => components;
 
         public T AddComponent<T>(string fileName) where T : ANoteComponent
         {
