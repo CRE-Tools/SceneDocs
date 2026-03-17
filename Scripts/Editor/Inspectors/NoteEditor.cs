@@ -3,16 +3,16 @@ using UnityEditor;
 
 namespace PUCPR.SceneDocs.Editor
 {
-    [CustomEditor(typeof(NoteCreator))]
-    public class NoteCreator_Editor : UnityEditor.Editor
+    [CustomEditor(typeof(Note))]
+    public class NoteEditor : UnityEditor.Editor
     {
-        private NoteCreator creator;
-        private string noteName;
-        private UnityEditor.Editor noteEditor;
+        private Note _note;
+        private string _noteName;
+        private UnityEditor.Editor _noteEditor;
 
         private void OnEnable()
         {
-            creator = (NoteCreator)target;
+            _note = (Note)target;
         }
 
         public override void OnInspectorGUI()
@@ -24,29 +24,28 @@ namespace PUCPR.SceneDocs.Editor
             if (!DrawNoteData())
                 return;
 
-            //GUILayout.Space(10);
             AddNewNoteComponent();
-
         }
 
         private bool AddNewNote()
         {
-            if (creator.currentNote == null)
+            if (_note.currentNote == null)
             {
-                GUILayout.Label("Nova Nota");
-                noteName = EditorGUILayout.TextField("Note", noteName);
+                GUILayout.Label("New Note", EditorStyles.boldLabel);
+                _noteName = EditorGUILayout.TextField("Title", _noteName);
 
-                EditorGUI.BeginDisabledGroup(string.IsNullOrEmpty(noteName));
-                if (GUILayout.Button("Add Note"))
+                EditorGUI.BeginDisabledGroup(string.IsNullOrEmpty(_noteName));
+                if (GUILayout.Button("Create"))
                 {
                     string folder = "Assets/Notes";
                     NoteUtility.EnsureFolderExists(folder);
 
-                    creator.currentNote = ScriptableObject.CreateInstance<NoteData>();
+                    _note.currentNote = ScriptableObject.CreateInstance<NoteData>();
 
-                    string path = $"{folder}/{noteName.ToUpper()}.asset";
+                    string path = $"{folder}/{_noteName}.asset";
 
-                    UnityEditor.AssetDatabase.CreateAsset(creator.currentNote, path);
+                    UnityEditor.AssetDatabase.CreateAsset(_note.currentNote, path);
+                    PopulateNewNote();
                     UnityEditor.AssetDatabase.SaveAssets();
                 }
                 EditorGUI.EndDisabledGroup();
@@ -60,29 +59,29 @@ namespace PUCPR.SceneDocs.Editor
 
         private void GetNoteEditor()
         {
-            if (creator.currentNote != null)
+            if (_note.currentNote != null)
             {
-                if (noteEditor == null || noteEditor.target != creator.currentNote)
-                    UnityEditor.Editor.CreateCachedEditor(creator.currentNote, null, ref noteEditor);
+                if (_noteEditor == null || _noteEditor.target != _note.currentNote)
+                    UnityEditor.Editor.CreateCachedEditor(_note.currentNote, null, ref _noteEditor);
             }
         }
 
         private bool DrawNoteData()
         {
-            if (!noteEditor)
+            if (!_noteEditor)
             {
                 GetNoteEditor();
                 return false;
             }
 
-            noteEditor.OnInspectorGUI();
+            _noteEditor.OnInspectorGUI();
 
             return true;
         }
 
         private void AddNewNoteComponent()
         {
-            if (GUILayout.Button("AddComponent"))
+            if (GUILayout.Button("Add Note Component"))
             {
                 var menu = new GenericMenu();
 
@@ -90,14 +89,14 @@ namespace PUCPR.SceneDocs.Editor
                 {
                     string menuName = NoteUtility.GetMenuName(type);
 
-                    bool alreadyHas = creator.currentNote.HasComponent(type);
+                    bool alreadyHas = _note.currentNote.HasComponent(type);
 
                     if (alreadyHas)
                         menu.AddDisabledItem(new GUIContent(menuName));
                     else
                         menu.AddItem(new GUIContent(menuName), false, () =>
                         {
-                            creator.currentNote.AddComponent(type, menuName);
+                            _note.currentNote.AddComponent(type, menuName);
                         });
                 }
 
@@ -105,10 +104,19 @@ namespace PUCPR.SceneDocs.Editor
             }
         }
 
+        private void PopulateNewNote()
+        {
+            _note.currentNote.title = _noteName;
+            //_note.currentNote.sceneName = 
+            //_note.currentNote.user_author = 
+            //_note.currentNote.date_created =
+            //_note.currentNote.date_lastUpdate = 
+        }
+
         private void OnDisable()
         {
-            if (noteEditor != null)
-                DestroyImmediate(noteEditor);
+            if (_noteEditor != null)
+                DestroyImmediate(_noteEditor);
         }
     }
 }

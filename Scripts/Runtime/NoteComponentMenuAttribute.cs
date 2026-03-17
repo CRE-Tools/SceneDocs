@@ -1,6 +1,5 @@
 using System;
 
-
 namespace PUCPR.SceneDocs
 {
     [AttributeUsage(AttributeTargets.Class)]

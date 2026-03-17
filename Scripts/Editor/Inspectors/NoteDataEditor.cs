@@ -1,12 +1,11 @@
 using System.Collections.Generic;
-using System.ComponentModel;
 using UnityEditor;
 using UnityEngine;
 
 namespace PUCPR.SceneDocs.Editor
 {
     [CustomEditor(typeof(NoteData))]
-    public class NoteData_Editor : UnityEditor.Editor
+    public class NoteDataEditor : UnityEditor.Editor
     {
         private NoteData noteData;
 

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace PUCPR.SceneDocs
 {
-    public class NoteCreator : MonoBehaviour
+    public class Note : MonoBehaviour
     {
         public NoteData currentNote;
     }
