@@ -81,7 +81,7 @@ namespace PUCPR.SceneDocs.Editor
 
         private void AddNewNoteComponent()
         {
-            if (GUILayout.Button("Add Note Component"))
+            if (GUILayout.Button("+Note Component"))
             {
                 var menu = new GenericMenu();
 
